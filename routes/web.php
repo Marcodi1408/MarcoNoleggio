@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +18,11 @@ Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/lista_aziende', [PublicController::class, 'listaAziende'])->name('lista_aziende');
 Route::get('/lista_aziende_search', [SearchControllerAziende::class, 'search'])->name('lista_aziende_search');
 Route::get('/lista_automobili', [PublicController::class, 'listaAutomobili'])->name('lista_automobili');
-Route::get('/lista_promozioni_search', [SearchControllerPromozioni::class, 'search'])->name('lista_promozioni_search');
+Route::get('/lista_promozioni_search', [SearchControllerAuto::class, 'search'])->name('lista_promozioni_search');
 Route::get('/who', function () { return view('who'); })->name('who');
 Route::get('/faqs', [FaqController::class, 'index'])->name('faqs');
 Route::get('/azienda/{aziendeId}', [SearchControllerAziende::class, 'show'])->name('aziendapage.show');
-Route::get('/promozione/{promId}', [SearchControllerPromozioni::class, 'show'])->name('prompage.show');
+Route::get('/promozione/{promId}', [SearchControllerAuto::class, 'show'])->name('prompage.show');
 
 
 Route::middleware('can:isUser')->group(function () {
@@ -29,8 +30,8 @@ Route::middleware('can:isUser')->group(function () {
     Route::get('/userpage/{userId}', [UserController::class, 'show'])->name('userpage.show');
     Route::get('/pagina_modifica/{userId}', [UserController::class, 'show1'])->name('pagina_modifica');
     Route::put('/userpage_update/{userId}', [UserController::class, 'update'])->name('userpage_update');
-    Route::get('/coupon/store/{promozioneId}', [CouponController::class, 'store'])->name('coupon.store');
-    Route::get('/coupon/{couponId}', [CouponController::class, 'show'])->name('coupon.show');
+    Route::get('/coupon/store/{promozioneId}', [AutoController::class, 'store'])->name('coupon.store');
+    Route::get('/coupon/{couponId}', [AutoController::class, 'show'])->name('coupon.show');
 
 });
 
